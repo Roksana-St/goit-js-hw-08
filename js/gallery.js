@@ -65,7 +65,7 @@ const images = [
 ];
 const gallery = document.querySelector(".gallery");
 const create = images.map(({ preview, original, description }) => {
-    return `<li class="gallery-item">
+  return `<li class="gallery-item">
   <a class="gallery-link" href="${original}">
     <img
       class="gallery-image"
@@ -75,5 +75,27 @@ const create = images.map(({ preview, original, description }) => {
     />
   </a>
 </li>
-`
-})
+`;
+}).join("");
+
+gallery.innerHTML = create;
+
+gallery.addEventListener('click', (event) => {
+    event.preventDefault();
+    if(event.target.nodeName !== 'IMG'){
+        return;
+    };
+    
+    const modal = `<div class="modal-container">
+                      <div class="modal-content">
+                          <img class="modal" src="${event.target.dataset.source}" alt="${event.target.alt}" />
+                      </div>
+                  </div>`;
+    const instance = basicLightbox.create(modal);
+
+  instance.show();
+  
+  instance.element().addEventListener('click', () => {
+        instance.close();
+    });
+});
