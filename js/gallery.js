@@ -87,9 +87,7 @@ gallery.addEventListener('click', (event) => {
     };
     
     const modal = `<div class="modal-container">
-                      <div class="modal-content">
                           <img class="modal" src="${event.target.dataset.source}" alt="${event.target.alt}" />
-                      </div>
                   </div>`;
     const instance = basicLightbox.create(modal);
 
